@@ -39,7 +39,7 @@ public class IssueController {
     }
 
 
-    @GetMapping("/{assigneeEmail}")
+    @GetMapping("/assignee/{email}")
     public ResponseEntity<List<Issue>> getIssueByAssigneedEmail(@PathVariable String userEmail){
         return ResponseEntity.ok(issueService.findIssueByAssigneeEmail(userEmail));
     }
@@ -55,10 +55,10 @@ public class IssueController {
     }
 
     @PostMapping("/addComments/{issueId}")
-    public ResponseEntity<IssueComment>addComeents(@PathVariable Long isueId,
+    public ResponseEntity<IssueComment>addComeents(@PathVariable("issueId") Long issueId,
                                                    @RequestParam String authorEmail,
                                                    @RequestBody String body){
-        return ResponseEntity.ok(issueService.addComment(isueId, authorEmail, body));
+        return ResponseEntity.ok(issueService.addComment(issueId, authorEmail, body));
     }
 
     @PostMapping("/sprint")

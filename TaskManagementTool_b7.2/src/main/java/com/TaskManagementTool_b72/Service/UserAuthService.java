@@ -90,20 +90,31 @@ public class UserAuthService {
 
     public void resetPassword(String token, String newPassword) {
 
-        UserAuth user= userRepo.findByResetToken(token).orElseThrow(()-> new RuntimeException("Invalid token"));
+        System.out.println("=================================");
+        System.out.println("TOKEN RECEIVED = [" + token + "]");
+        System.out.println("NEW PASSWORD = [" + newPassword + "]");
+        System.out.println("=================================");
 
-        if(user.getResetTokenExpire().before(new Date())) {
+        UserAuth user = userRepo.findByResetToken(token)
+                .orElseThrow(() -> new RuntimeException("Invalid token"));
 
+        System.out.println("USER FOUND = " + user.getUserOfficialEmail());
+        System.out.println("TOKEN EXPIRE TIME = " + user.getResetTokenExpire());
+        System.out.println("CURRENT TIME = " + new Date());
+
+        if (user.getResetTokenExpire().before(new Date())) {
             throw new RuntimeException("Token got expired");
         }
 
-        user.setPassword(passwordEncoder.encode(newPassword) );
+        user.setPassword(passwordEncoder.encode(newPassword));
         user.setResetToken(null);
         user.setResetTokenExpire(null);
 
         userRepo.save(user);
 
+        System.out.println("PASSWORD RESET SUCCESSFULLY");
     }
+    
 
     public String logout(HttpServletRequest request) {
         String header= request.getHeader("Authorization");

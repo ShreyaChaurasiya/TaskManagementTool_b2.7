@@ -85,7 +85,7 @@ public class SprintService {
 
 
         for(Issue i:issue) {
-            if(!i.getIssueStatus().name().equals(IssueStatus.DONE)) {
+            if (i.getIssueStatus() != IssueStatus.DONE) {
                 i.setSprintId(null);
                 issueRepo.save(i);
             }
@@ -129,6 +129,10 @@ public class SprintService {
         response.put("burnDownData", chart);
 
         return response;
+    }
+
+    public List<Issue> getIssuesBySprint(Long sprintId) {
+        return issueRepo.findBySprintId(sprintId);
     }
 }
 

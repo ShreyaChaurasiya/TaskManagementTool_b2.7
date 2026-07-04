@@ -43,15 +43,22 @@ public class IssueService {
     @Transactional
     public Issue createIssue(Issue issue) {
 
-        issue.setIssueType(issue.getIssueType() !=null? issue.getIssueType():IssueType.TASK);
-        issue.setPriority(issue.getPriority() !=null? issue.getPriority():IssuePriority.MEDIUM);
+        issue.setIssueType(
+                issue.getIssueType() != null
+                        ? issue.getIssueType()
+                        : IssueType.TASK);
+
+        issue.setPriority(
+                issue.getPriority() != null
+                        ? issue.getPriority()
+                        : IssuePriority.MEDIUM);
+
         issue.setIssueStatus(IssueStatus.OPEN);
 
-        Issue saved= issueRepo.save(issue);
+        // Set issue key before first save
+        issue.setIssueKey("PROJ-" + System.currentTimeMillis());
 
-        saved.setIssueKey(generatedKey(saved.getId()));
-
-        return issueRepo.save(saved);
+        return issueRepo.save(issue);
     }
 
     public List<Issue>findIssueByAssigneeEmail(String userOfficialEmail){

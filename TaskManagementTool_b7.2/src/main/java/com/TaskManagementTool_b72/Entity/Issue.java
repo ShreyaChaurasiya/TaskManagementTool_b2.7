@@ -52,6 +52,11 @@ public class Issue {
 
     private LocalDateTime dueDate;
 
+    private Long projectId;
+
+    private Long parentIssueId;
+
+    private Integer backLogPosition;
 
 
     public Long getId() {
@@ -164,6 +169,30 @@ public class Issue {
 
     public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public Long getParentIssueId() {
+        return parentIssueId;
+    }
+
+    public void setParentIssueId(Long parentIssueId) {
+        this.parentIssueId = parentIssueId;
+    }
+
+    public Integer getBackLogPosition() {
+        return backLogPosition;
+    }
+
+    public void setBackLogPosition(Integer backLogPosition) {
+        this.backLogPosition = backLogPosition;
     }
 }
 

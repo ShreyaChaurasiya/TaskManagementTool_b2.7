@@ -25,8 +25,10 @@ public class UserProfileUpdateService {
         UserProfileUpdate profile= new UserProfileUpdate();
         profile.setUserName(userProfile.userName);
         profile.setUserEmail(userProfile.userEmail);
+        profile.setDepartment(userProfile.department);
         profile.setDesignation(userProfile.designation);
         profile.setOrganizationName(userProfile.organizationName);
+        profile.setActive(userProfile.active);
         profile.setActive(true);
 
         userProfileUpdateRepo.save(profile);

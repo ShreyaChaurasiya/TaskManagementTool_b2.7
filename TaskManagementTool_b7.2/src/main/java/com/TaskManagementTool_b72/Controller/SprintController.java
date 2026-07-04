@@ -52,9 +52,12 @@ public class SprintController {
     public ResponseEntity<Map<String,Object>>getBurnDownData(@PathVariable Long sprintId){
         return ResponseEntity.ok(sprintService.getBurndownData(sprintId));
     }
+
+    @GetMapping("/{sprintId}/issues")
+    public ResponseEntity<?> getIssuesBySprint(@PathVariable Long sprintId) {
+
+        return ResponseEntity.ok(
+                sprintService.getIssuesBySprint(sprintId)
+        );
+    }
 }
-
-
-
-
-

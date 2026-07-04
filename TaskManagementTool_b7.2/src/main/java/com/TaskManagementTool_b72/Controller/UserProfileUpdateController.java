@@ -33,7 +33,7 @@ public class UserProfileUpdateController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<UserProfileUpdateDTO>getUserProfileByEmail(@PathVariable String userEmail){
+    public ResponseEntity<UserProfileUpdateDTO>getUserProfileByEmail(@PathVariable("email") String userEmail){
         return ResponseEntity.ok(userProfileUpdateService.getProfileByEmail(userEmail));
     }
 
